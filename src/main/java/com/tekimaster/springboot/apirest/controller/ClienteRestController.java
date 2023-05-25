@@ -163,7 +163,7 @@ public class ClienteRestController {
 			
 			String nombreFoto = cliente.getFoto();
 			
-			fileService.eliminarArchivo(nombreFoto);
+			//fileService.eliminarArchivo(nombreFoto);
 			
 			clienteService.delete(id);
 		}catch (DataAccessException e) {
@@ -184,17 +184,17 @@ public class ClienteRestController {
 		if(!archivo.isEmpty()) {
 			String nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename().replace(" ", "");
 
-			try {
+			/*try {
 				fileService.copiarArchivo(archivo, nombreArchivo);
 			}catch (IOException e) {
 				response.put("mensaje", "Error al subir la imagen del cliente " + nombreArchivo);
 				response.put("error", e.getMessage()+" "+e.getCause());
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-			}
+			}*/
 			
 			String nombreFotoAnterior = cliente.getFoto();
 			
-			fileService.eliminarArchivo(nombreFotoAnterior);
+			//fileService.eliminarArchivo(nombreFotoAnterior);
 			
 			cliente.setFoto(nombreArchivo);
 			
@@ -210,14 +210,14 @@ public class ClienteRestController {
 	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto){
 		Resource recurso = null;
 		
-		try {
+		/*try {
 			recurso = fileService.getRecursoArchivo(nombreFoto);
 			if(!recurso.exists() || !recurso.isReadable()) {
 				recurso = new UrlResource(Paths.get(Constante.PATH_STATIC_IMAGES).resolve(Constante.USER_DEFAULT_PNG).toAbsolutePath().toUri());
 			}
 		} catch (MalformedURLException e) {
 			log.error("URL mal formada en verFoto");
-		}
+		}*/
 		
 		HttpHeaders cabecera = new HttpHeaders();
 		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+nombreFoto+"\"");
