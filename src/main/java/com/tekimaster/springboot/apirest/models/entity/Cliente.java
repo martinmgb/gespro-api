@@ -43,16 +43,16 @@ public class Cliente implements Serializable {
 	@NotEmpty
 	private String apellido;
 	
-	@NotEmpty
+	//@NotEmpty
 	@Email
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String email;
 	
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "fecha_nac")
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;

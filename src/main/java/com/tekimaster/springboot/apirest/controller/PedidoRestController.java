@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -50,7 +51,7 @@ public class PedidoRestController {
 	
 	@GetMapping("/pedidos/page/{page}")
 	public Page<Pedido> index(@PathVariable Integer page){
-		return pedidoService.findAll(PageRequest.of(page, 20)); 
+		return pedidoService.findAll(PageRequest.of(page, 20, Sort.by("id").descending()));
 	}
 	
 	@GetMapping("/pedidos/{id}")
@@ -124,7 +125,7 @@ public class PedidoRestController {
 			pedidoActual.setDetalleProductos(pedido.getDetalleProductos());
 			pedidoActual.setDetalleInsumos(pedido.getDetalleInsumos());
 			pedidoActual.setPorcentajeDescuento(pedido.getPorcentajeDescuento());
-			pedidoActual.setTipoPedido(OperacionesUtil.getTipoPedido(pedido));
+			pedidoActual.setTipoPedido(pedido.getTipoPedido());
 			pedidoActual.setFechaEntrega(pedido.getFechaEntrega());
 			pedidoUpdated =  pedidoService.save(pedidoActual);
 		}catch (DataAccessException e) {

@@ -304,9 +304,9 @@ public class Pedido implements Serializable {
 
 	public BigDecimal getPrecioDetal() {
 		BigDecimal precio = BigDecimal.valueOf(
-				(getCostoInsumos()+getUtilidadInsumosDetal())
-				*(Constante.UNIDAD_TIPO_DOUBLE+(Constante.IVA/Constante.DOUBLE_100))
-				+getPrecioAlDetalProductos());
+				(getCostoInsumos()+getUtilidadInsumosDetal()
+				+getCostoProductos()+getUtilidadProductosDetal())
+						*(Constante.UNIDAD_TIPO_DOUBLE+(Constante.IVA/Constante.DOUBLE_100)));
 		if(this.porcentajeDescuento!=null) {
 			precio = precio.multiply(BigDecimal.valueOf(Constante.UNIDAD_TIPO_DOUBLE-(this.porcentajeDescuento/Constante.DOUBLE_100)));
 		}
