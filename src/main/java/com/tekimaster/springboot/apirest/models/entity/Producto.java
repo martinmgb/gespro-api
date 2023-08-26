@@ -208,7 +208,7 @@ public class Producto implements Serializable {
 	}
 
 	private Double getUtilidadInsumosDetal() {
-		return getCostoInsumos()*(getPorcentajeUtilidadDetal()/Constante.DOUBLE_100);
+		return getCostoInsumos()/(Constante.UNIDAD_TIPO_DOUBLE-getPorcentajeUtilidadDetal()/Constante.DOUBLE_100);
 	}
 
 	private Double getUtilidadProductosDetal() {
@@ -227,7 +227,7 @@ public class Producto implements Serializable {
 	}
 
 	private Double getUtilidadInsumosMayor() {
-		return getCostoInsumos()*(getPorcentajeUtilidadMayor()/Constante.DOUBLE_100);
+		return getCostoInsumos()/(Constante.UNIDAD_TIPO_DOUBLE-getPorcentajeUtilidadMayor()/Constante.DOUBLE_100);
 	}
 
 	private Double getUtilidadProductosMayor() {
@@ -252,7 +252,7 @@ public class Producto implements Serializable {
 
 	public BigDecimal getPrecioDetal() {
 		BigDecimal precio = BigDecimal.valueOf(getCostoInsumos()
-				*(Constante.UNIDAD_TIPO_DOUBLE+(getPorcentajeUtilidadDetal()/Constante.DOUBLE_100))
+				/(Constante.UNIDAD_TIPO_DOUBLE-getPorcentajeUtilidadDetal()/Constante.DOUBLE_100)
 				*(Constante.UNIDAD_TIPO_DOUBLE+(Constante.IVA/Constante.DOUBLE_100))
 				+getPrecioAlDetalProductos());
 		return precio.setScale(-2, RoundingMode.HALF_UP);
@@ -276,7 +276,7 @@ public class Producto implements Serializable {
 
 	public BigDecimal getPrecioMayor() {
 		BigDecimal precio = BigDecimal.valueOf(getCostoInsumos()
-				*(Constante.UNIDAD_TIPO_DOUBLE+(getPorcentajeUtilidadMayor()/Constante.DOUBLE_100))
+				/(Constante.UNIDAD_TIPO_DOUBLE-getPorcentajeUtilidadMayor()/Constante.DOUBLE_100)
 				*(Constante.UNIDAD_TIPO_DOUBLE+(Constante.IVA/Constante.DOUBLE_100))
 				+getPrecioAlMayorProductos());
 		return precio.setScale(-2, RoundingMode.HALF_UP);
